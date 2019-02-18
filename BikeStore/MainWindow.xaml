@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BikeStore"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" Name ="DBGrid"  HorizontalAlignment="Stretch"  Margin="10,20,20,17"
+                  VerticalAlignment="Stretch"  ItemsSource="{Binding}" />
+        <ToolBar>
+            <Button Name="btnStores" Content="Stores" Click="BtnStores_Click"></Button>
+            <Button Name="btnBikes" Content="Bikes" Click="BtnBikes_Click"></Button>
+            <Button Name="btnModels" Content="Models" Click="BtnModels_Click"></Button>
+            <Button Name="btnOrders" Content="Orders" Click="BtnOrders_Click" ></Button>
+            <Button Name="btnUser" Content="User" Click="BtnUser_Click" ></Button>
+
+        </ToolBar>
+        <Border Grid.Row="2">
+            <Canvas>
+                <Button Name="btnAdd" Content="Add" Width="100" Height="26" Canvas.Left="10" Click="BtnAdd_Click"  />
+                <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Canvas.Left="130" Click="BtnEdit_Click"  />
+                <Button Name="btnDelete" Content="Delete" Width="100" Height="26" Canvas.Left="250" Click="BtnDelete_Click" />
+                <Button Name="btnReport" Content="Report" Click="BtnReport_Click" Width="100" Height="26" Canvas.Left="370"/>
+
+            </Canvas>
+
+        </Border>
+
     </Grid>
 </Window>

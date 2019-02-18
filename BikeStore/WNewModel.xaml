@@ -1,0 +1,33 @@
+﻿<Window x:Class="BikeStore.WNewModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeStore"
+        mc:Ignorable="d"
+    Title="New Model" Height="450" Width="440" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Manufacture:" Margin="25,15,20,15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" />
+        <Label Content="Name:" Margin="25,15,20,15" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" />
+        <Label Content="Country:" Margin="25,15,20,15" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" />
+        <Label Content="Description:" Margin="25,15,20,110" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" />
+        <ComboBox Name="cmbManufacture" Grid.Column="1" Margin="20,15" ItemsSource="{Binding}"></ComboBox>
+        <TextBox Name="txtName" Grid.Column="1" Grid.Row="1" Margin="20,15"></TextBox>
+        <TextBox Name="txtDescription" Grid.Column="1" Grid.Row="3" Margin="20,15"></TextBox>
+        <ComboBox Name="cmbCountry" Grid.Column="1" Grid.Row="2" Margin="20,15" ItemsSource="{Binding}"></ComboBox>
+        <Button Name="Save" Content="Save" Grid.Column="1" Grid.Row="4" Margin="20,15" Click="Save_Click"></Button>
+
+    </Grid>
+</Window>
