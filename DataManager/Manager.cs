@@ -21,7 +21,7 @@ namespace DataManager
     public class Manager
     {
         // Data Source=DELL;Initial Catalog=Tourfirm;Integrated Security=True
-        string ConString = @" Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Store;Integrated Security=True";
+        private string ConString = @"Data Source=HAMANN\HAMANN;Initial Catalog=Store;Integrated Security=True;";
 
         public SqlConnection Connect;
 
@@ -68,7 +68,6 @@ namespace DataManager
             catch (Exception)
             {
                 MessageBox.Show("Wrong connection!");
-                throw;
             }
 
         }

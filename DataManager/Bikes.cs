@@ -13,11 +13,11 @@ namespace DataManager
         string MySQL;
         public DataTable Table;
 
-        SqlDataAdapter adapter;
+        //SqlDataAdapter adapter;
         //SqlCommandBuilder builder;
 
 
-        public DataTable GetTable()
+        public DataTable GetTable(int storeId = 0)
         {
             //MySQL = "Select TBikes.Id, TManufacture.Name as Manufacture, TModel.Name, TModel.[Desc], " +
             //    "TColors.Name as Color, TYear.Year, TBikes.Price, TStores.Name as Store " +
@@ -32,19 +32,6 @@ namespace DataManager
             Table = new DataTable();
             //adapter = new SqlDataAdapter(MySQL, Manager.Instance.Connect);
             //adapter.Fill(Table);
-
-            MySQL = "SelectAllBikes";
-            SqlCommand sqlCommand = new SqlCommand(MySQL, Manager.Instance.Connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            SqlDataReader dataReader = sqlCommand.ExecuteReader();
-            Table.Load(dataReader);            
-
-            return Table;
-        }
-
-        public DataTable GetTable(int storeId)
-        {
-            Table = new DataTable();
 
             MySQL = "SelectBikesFromStore";
             SqlCommand sqlCommand = new SqlCommand(MySQL, Manager.Instance.Connect);

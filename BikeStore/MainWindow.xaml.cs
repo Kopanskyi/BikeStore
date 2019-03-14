@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataManager;
+using ReportManager;
 using System.Data;
 using System.Data.SqlClient;
-using ReportManager;
 
 namespace BikeStore
 {
@@ -212,18 +212,39 @@ namespace BikeStore
             switch (Manager.Instance.ActiveTable)
             {
                 case Active.Stores:
+                    {
+                        Report.Instance.DataTableForReport = Manager.Instance.Stores.GetTable().Copy();
+                        WReport report = new WReport();
+                        report.ShowDialog();
+                    }
                     break;
                 case Active.Bikes:
                     {
-                        Report.Instance.ExcelReport.CreateBikesList();
-                        MessageBox.Show("Complete");
+                        Report.Instance.DataTableForReport = Manager.Instance.Bikes.GetTable().Copy();
+                        WReport report = new WReport();
+                        report.ShowDialog();
                     }
                     break;
                 case Active.Models:
+                    {
+                        Report.Instance.DataTableForReport = Manager.Instance.Models.GetTable().Copy();
+                        WReport report = new WReport();
+                        report.ShowDialog();
+                    }
                     break;
                 case Active.Users:
+                    {
+                        Report.Instance.DataTableForReport = Manager.Instance.Users.GetTable().Copy();
+                        WReport report = new WReport();
+                        report.ShowDialog();
+                    }
                     break;
                 case Active.Orders:
+                    {
+                        Report.Instance.DataTableForReport = Manager.Instance.Orders.GetOrdersTable().Copy();
+                        WReport report = new WReport();
+                        report.ShowDialog();
+                    }
                     break;
                 default:
                     break;

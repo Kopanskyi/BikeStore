@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 using DataManager;
 using System.Data;
+using System.Windows.Forms;
 
 namespace ReportManager
 {
@@ -16,16 +17,15 @@ namespace ReportManager
         int activeRow;
         string path = System.IO.Directory.GetCurrentDirectory();
 
-        public void CreateBikesList()
+        public void CreateExcelReport()
         {
             ExcelApp = new Excel.Application();
 
             ExcelApp.Workbooks.Open(path + "\\rep\\template.xlsx");
 
-            DataTable table = Manager.Instance.Bikes.GetTable();
             activeRow = 1;
 
-            foreach (DataRow row in table.Rows)
+            foreach (DataRow row in Report.Instance.DataTableForReport.Rows)
             {
                 activeColumn = 1;
 
@@ -43,7 +43,7 @@ namespace ReportManager
                 activeRow++;
             }            
 
-            CloseBikesList();
+            CloseReport();
         }
 
         private void CreateColumn(int row, int column, string value)
@@ -53,12 +53,12 @@ namespace ReportManager
             cell.BorderAround();
         }
 
-        private void CloseBikesList()
+        private void CloseReport()
         {
-            ExcelApp.Workbooks[1].SaveAs(path + "\\Bikes_Report.xls");
+            ExcelApp.Workbooks[1].SaveAs(path + "\\Excel_Report.xls");
             ExcelApp.Workbooks.Close();
             ExcelApp.Quit();
-
+            MessageBox.Show("Report created successfully");
         }
     }
 }

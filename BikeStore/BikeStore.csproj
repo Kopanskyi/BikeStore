@@ -86,6 +86,9 @@
     <Compile Include="WNewOrder.xaml.cs">
       <DependentUpon>WNewOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WReport.xaml.cs">
+      <DependentUpon>WReport.xaml</DependentUpon>
+    </Compile>
     <Page Include="WinBikesList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WNewOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

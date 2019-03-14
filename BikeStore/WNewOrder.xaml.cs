@@ -22,15 +22,16 @@ namespace BikeStore
     public partial class WNewOrder : Window
     {
         bool IsNew = false;
-        public int Id;
+        int OrderId;
+
         public int ClientId;
         public DateTime DateTime;
         DataTable OrderTable;
 
         public WNewOrder(int id)
         {
-            Id = id;
-            IsNew = Id == 0;
+            OrderId = id;
+            IsNew = OrderId == 0;
             InitializeComponent();
         }
 
@@ -38,6 +39,9 @@ namespace BikeStore
         {
             OrderTable = Manager.Instance.Orders.GetOrdersTable();
 
+            cmbStores.DataContext = Manager.Instance.Stores.GetTable();
+            cmbStores.DisplayMemberPath = "Name";
+            cmbStores.SelectedValuePath = "Id";
 
             if (IsNew)
             {
@@ -46,32 +50,28 @@ namespace BikeStore
                 dtpDate.DisplayDate = DateTime.Now;
                 dtpDate.SelectedDate = DateTime.Now;
 
-                cmbStores.DataContext = Manager.Instance.Stores.GetTable();
-                cmbStores.DisplayMemberPath = "Name";
-                cmbStores.SelectedValuePath = "Id";
             }
             else
             {
-                lblOrderId.Content = Id;
+                lblOrderId.Content = OrderId;
                 cmbUsers.SelectedValue = ClientId;
                 dtpDate.SelectedDate = DateTime;
                 dtpDate.DisplayDate = DateTime;
 
-                cmbStores.DisplayMemberPath = "Name";
-                cmbStores.SelectedValuePath = "Id";
-                cmbStores.SelectedValue = from r in OrderTable.Select()
-                                          where r.Field<int>("Id") == Id
-                                          select r.Field<int>("StoreId");
 
-                //cmbStores.SelectedItem = from r in Manager.Instance.Stores.GetTable().Select()
-                //                         where r.Field<int>("Id") == Convert.ToInt32(cmbStores.SelectedValue)
-                //                         select r.Field<string>("Name");
+                //int storeId = (from r in OrderTable.Select()
+                //         where r.Field<int>("Id") == OrderId
+                //         select r.Field<int>("StoreId")).First();
 
+                cmbStores.IsEnabled = false;
 
+                cmbStores.SelectedValue = (from r in OrderTable.Select()
+                                          where r.Field<int>("Id") == OrderId
+                                          select r.Field<int>("StoreId")).First();
             }
 
 
-            GridOrderItems.ItemsSource = Manager.Instance.Orders.GetItemsTable(Id).DefaultView;
+            GridOrderItems.ItemsSource = Manager.Instance.Orders.GetItemsTable(OrderId).DefaultView;
             Manager.Instance.Orders.GetNewItemsId();
             Manager.Instance.Orders.InitializeTemporaryItemsTable();
 
@@ -92,8 +92,8 @@ namespace BikeStore
         private void BtnAdd_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            WinBikesList bikesList = new WinBikesList(Convert.ToInt16(lblOrderId.Content), 
-                Convert.ToInt16(cmbStores.SelectedValue));
+            WinBikesList bikesList = new WinBikesList(Convert.ToInt32(lblOrderId.Content), 
+                Convert.ToInt32(cmbStores.SelectedValue));
             bikesList.ShowDialog();
 
             //ShowItems();
@@ -104,7 +104,7 @@ namespace BikeStore
 
         private void ShowItems()
         {
-            GridOrderItems.ItemsSource = Manager.Instance.Orders.GetItemsTable(Id).DefaultView;
+            GridOrderItems.ItemsSource = Manager.Instance.Orders.GetItemsTable(OrderId).DefaultView;
         }
 
         private void BtnOk_PreviewMouseDown(object sender, MouseButtonEventArgs e)
